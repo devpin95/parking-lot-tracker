@@ -32,7 +32,7 @@ router.get('/lots', function(req, res) {
             res.status = 400;
             res.send({status: 200, message: "Added " + query.add + " to lot " + query.lot});
         }
-        else if (query.hasOwnProperty("fill"))
+        else if (query.hasOwnProperty("fill")) {
             var fill = parseInt(query.fill);
 
             if ( fill <= lots[query.lot].capacity ) {
