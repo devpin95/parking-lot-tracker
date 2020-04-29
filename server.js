@@ -27,7 +27,7 @@ router.get('/lots', function(req, res) {
     var query = Object.keys(req.query).length === 0 ? null : req.query;
 
     if ( query ) {
-
+        res.send(query);
     }
 });
 
