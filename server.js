@@ -32,9 +32,16 @@ router.get('/lots', function(req, res) {
             res.status = 400;
             res.send({status: 200, message: "Added " + query.add + " to lot " + query.lot});
         }
-        else if (query.hasOwnProperty("fill")) {
-            lots[query.lot].filled = parseInt(query.fill);
-            res.send({status: 200, message: "Set lot " + query.lot + " to " + query.fill});
+        else if (query.hasOwnProperty("fill"))
+            var fill = parseInt(query.fill);
+
+            if ( fill <= lots[query.lot].capacity ) {
+                lots[query.lot].filled = parseInt(query.fill);
+                res.send({status: 200, message: "Set lot " + query.lot + " to " + query.fill});
+            } else {
+                res.status = 400;
+                res.send({status: 400, message: "value over lot capacity"});
+            }
         }
         else if (query.hasOwnProperty("capacity")) {
             lots[query.lot].capacity = parseInt(query.capacity);
