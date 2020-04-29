@@ -26,8 +26,16 @@ router.get('/lots', function(req, res) {
 }).put('/lots', function(req, res) {
     var query = Object.keys(req.query).length === 0 ? null : req.query;
 
-    if ( query ) {
-        res.send(query);
+    if ( query && query.hasOwnProperty("lot") ) {
+        if ( query.hasOwnProperty("add") ) {
+            lots[query.lot].filled += query.add;
+        }
+        else if (query.hasOwnProperty("fill")) {
+            lots[query.lot].filled += query.add;
+        }
+    } else {
+        res.status = 400;
+        res.send({status: 400, message: "Must have query paramemter with specified lot and action"});
     }
 });
 
