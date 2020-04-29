@@ -11,24 +11,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
 
 var lots = {
-    A: 0,
-    B: 0,
-    C: 0,
-    D: 0,
-    E: 0,
-    F: 0,
-    G: 0,
-    H: 0
+    A: {capacity: 0, filled: 0},
+    B: {capacity: 0, filled: 0},
+    C: {capacity: 0, filled: 0},
+    D: {capacity: 0, filled: 0},
+    E: {capacity: 0, filled: 0},
+    F: {capacity: 0, filled: 0},
+    G: {capacity: 0, filled: 0},
+    H: {capacity: 0, filled: 0}
 };
 
-router.get('/', function(req, res) {
+router.get('/lots', function(req, res) {
     res.send(lots);
-}).post('/movies', function(req, res) {
+}).put('/lots', function(req, res) {
+    var query = Object.keys(req.query).length === 0 ? null : req.query;
 
-}).put('/movies', function(req, res) {
+    if ( query ) {
 
-}).delete('/movies', function(req, res) {
-
+    }
 });
 
 app.use('/', router);
