@@ -11,14 +11,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
 
 var lots = {
-    A: {capacity: 0, filled: 0},
-    B: {capacity: 0, filled: 0},
-    C: {capacity: 0, filled: 0},
-    D: {capacity: 0, filled: 0},
-    E: {capacity: 0, filled: 0},
-    F: {capacity: 0, filled: 0},
-    G: {capacity: 0, filled: 0},
-    H: {capacity: 0, filled: 0}
+    A: {capacity: 20, filled: 0},
+    B: {capacity: 55, filled: 0},
+    C: {capacity: 35, filled: 0},
+    D: {capacity: 61, filled: 0},
+    E: {capacity: 92, filled: 0},
+    F: {capacity: 44, filled: 0},
+    G: {capacity: 13, filled: 0},
+    H: {capacity: 86, filled: 0}
 };
 
 router.get('/lots', function(req, res) {
@@ -35,6 +35,10 @@ router.get('/lots', function(req, res) {
         else if (query.hasOwnProperty("fill")) {
             lots[query.lot].filled = parseInt(query.fill);
             res.send({status: 200, message: "Set lot " + query.lot + " to " + query.fill});
+        }
+        else if (query.hasOwnProperty("capacity")) {
+            lots[query.lot].capacity = parseInt(query.capacity);
+            res.send({status: 200, message: "Set lot " + query.lot + " capacity to " + query.capacity});
         }
     } else {
         res.status = 400;
