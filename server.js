@@ -37,6 +37,23 @@ router.get('/lots', function(req, res) {
     } else {
         res.send(lots);
     }
+}).get('/lots/state', function(req, res) {
+    /*
+        {
+            "monitors": {
+                "lot_a": "STRING | NUMBER | BOOLEAN",
+                "lot_b": "STRING | NUMBER | BOOLEAN",
+                "lot_c": "STRING | NUMBER | BOOLEAN",
+                "lot_d": "STRING | NUMBER | BOOLEAN"
+            }
+        }
+     */
+    var json = {monitors: {}};
+    json.monitors.lot_a = lots.A.filled;
+    json.monitors.lot_b = lots.B.filled;
+    json.monitors.lot_c = lots.C.filled;
+    json.monitors.lot_d = lots.D.filled;
+    res.send(json);
 }).put('/lots', function(req, res) {
     var query = Object.keys(req.query).length === 0 ? null : req.query;
 
