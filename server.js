@@ -98,7 +98,7 @@ router.get('/lots', function(req, res) {
 
     res.send({status: 200, message: "Toggle updated"});
 }).post('/input', function (req, res) {
-    actions_test.inputv = req.body.value;
+    actions_test.input = req.body.value;
     res.json({status: 200, value: req.body.value});
 });
 
