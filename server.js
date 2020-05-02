@@ -42,6 +42,9 @@ router.get('/lots', function(req, res) {
 }).get('/lots/state', function(req, res) {
     /*
         {
+            "highlevel": {
+                "state": "BOOLEAN"
+            },
             "monitors": {
                 "lot_a": "STRING | NUMBER | BOOLEAN",
                 "lot_b": "STRING | NUMBER | BOOLEAN",
@@ -54,11 +57,20 @@ router.get('/lots', function(req, res) {
             }
         }
      */
-    var json = {monitors: {}, actions: {test_input_number: actions_test.input, test_toggle: actions_test.toggle}};
-    json.monitors.lot_a = lots.A.filled;
-    json.monitors.lot_b = lots.B.filled;
-    json.monitors.lot_c = lots.C.filled;
-    json.monitors.lot_d = lots.D.filled;
+    var json = {
+        highlevel: {
+            state: actions_test.high
+        },
+        monitors: {
+            lot_a: lots.A.filled,
+            lot_b: lots.B.filled,
+            lot_c: lots.C.filled,
+            lot_d: lots.D.filled
+        },
+        actions: {
+            test_input_number: actions_test.input, test_toggle: actions_test.toggle
+        }
+    };
     res.send(json);
 }).put('/lots', function(req, res) {
     var query = Object.keys(req.query).length === 0 ? null : req.query;
