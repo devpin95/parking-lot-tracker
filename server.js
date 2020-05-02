@@ -22,7 +22,21 @@ var lots = {
 };
 
 router.get('/lots', function(req, res) {
-    res.send(lots);
+    var query = Object.keys(req.query).length === 0 ? null : req.query;
+
+    if ( query ) {
+        if ( query.hasOwnProperty("lot") ) {
+            switch ( query.lot ) {
+                case 'A': case 'a': res.send({status: 200, value: lots[query.lot]}); break;
+                case 'B': case 'b': res.send({status: 200, value: lots[query.lot]}); break;
+                case 'C': case 'c': res.send({status: 200, value: lots[query.lot]}); break;
+                case 'D': case 'd': res.send({status: 200, value: lots[query.lot]}); break;
+                default: res.send({status: 404, message: "Lot not found"});
+            }
+        }
+    } else {
+        res.send(lots);
+    }
 }).put('/lots', function(req, res) {
     var query = Object.keys(req.query).length === 0 ? null : req.query;
 
