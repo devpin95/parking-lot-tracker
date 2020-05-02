@@ -17,6 +17,8 @@ var lots = {
     D: {capacity: 61, filled: 0}
 };
 
+
+// This is just test stuff for WebAPI class
 var actions_test = {
     input: "666",
     toggle: true,
