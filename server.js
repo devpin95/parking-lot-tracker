@@ -19,7 +19,8 @@ var lots = {
 
 var actions_test = {
     input: "666",
-    toggle: true
+    toggle: true,
+    high: true
 };
 
 router.get('/lots', function(req, res) {
@@ -100,6 +101,14 @@ router.get('/lots', function(req, res) {
 }).post('/input', function (req, res) {
     actions_test.input = req.body.value;
     res.json({status: 200, value: req.body.value});
+}).post('/high', function (req, res) {
+    var query = Object.keys(req.query).length === 0 ? null : req.query;
+
+    if ( query.hasOwnProperty(("state")) ) {
+        actions_test.high = query.state === "true";
+    }
+
+    res.send({status: 200, message: "Toggle updated"});
 });
 
 app.use('/', router);
