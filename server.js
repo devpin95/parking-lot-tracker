@@ -59,7 +59,7 @@ router.get('/lots', function(req, res) {
      */
     var json = {
         highlevel: {
-            state: actions_test.high
+            value: "This is a status message"
         },
         monitors: {
             lot_a: lots.A.filled,
