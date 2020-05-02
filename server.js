@@ -27,10 +27,10 @@ router.get('/lots', function(req, res) {
     if ( query ) {
         if ( query.hasOwnProperty("lot") ) {
             switch ( query.lot ) {
-                case 'A': case 'a': res.send({status: 200, value: lots[query.lot]}); break;
-                case 'B': case 'b': res.send({status: 200, value: lots[query.lot]}); break;
-                case 'C': case 'c': res.send({status: 200, value: lots[query.lot]}); break;
-                case 'D': case 'd': res.send({status: 200, value: lots[query.lot]}); break;
+                case 'A': case 'a': res.send({status: 200, value: lots[query.lot].filled}); break;
+                case 'B': case 'b': res.send({status: 200, value: lots[query.lot].filled}); break;
+                case 'C': case 'c': res.send({status: 200, value: lots[query.lot].filled}); break;
+                case 'D': case 'd': res.send({status: 200, value: lots[query.lot].filled}); break;
                 default: res.send({status: 404, message: "Lot not found"});
             }
         }
