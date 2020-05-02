@@ -114,13 +114,7 @@ router.get('/lots', function(req, res) {
     actions_test.input = req.body.value;
     res.json({status: 200, value: req.body.value});
 }).post('/high', function (req, res) {
-    var query = Object.keys(req.query).length === 0 ? null : req.query;
-
-    if ( query.hasOwnProperty(("state")) ) {
-        actions_test.high = query.state === "true";
-    }
-
-    res.send({status: 200, message: "Toggle updated"});
+    res.send({status: 200, message: "Button updated"});
 });
 
 app.use('/', router);
