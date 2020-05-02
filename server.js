@@ -14,11 +14,12 @@ var lots = {
     A: {capacity: 20, filled: 0},
     B: {capacity: 55, filled: 0},
     C: {capacity: 35, filled: 0},
-    D: {capacity: 61, filled: 0},
-    E: {capacity: 92, filled: 0},
-    F: {capacity: 44, filled: 0},
-    G: {capacity: 13, filled: 0},
-    H: {capacity: 86, filled: 0}
+    D: {capacity: 61, filled: 0}
+};
+
+var actions_test = {
+    input: "666",
+    toggle: true
 };
 
 router.get('/lots', function(req, res) {
@@ -45,10 +46,14 @@ router.get('/lots', function(req, res) {
                 "lot_b": "STRING | NUMBER | BOOLEAN",
                 "lot_c": "STRING | NUMBER | BOOLEAN",
                 "lot_d": "STRING | NUMBER | BOOLEAN"
+            },
+            "actions": {
+                "test_input_number": "STRING",
+                "test_toggle": "BOOLEAN"
             }
         }
      */
-    var json = {monitors: {}};
+    var json = {monitors: {}, actions: {test_input_number: actions_test.input, test_toggle: actions_test.toggle}};
     json.monitors.lot_a = lots.A.filled;
     json.monitors.lot_b = lots.B.filled;
     json.monitors.lot_c = lots.C.filled;
@@ -82,6 +87,18 @@ router.get('/lots', function(req, res) {
         res.status = 400;
         res.send({status: 400, message: "Must have query paramemter with specified lot and action"});
     }
+}).post('/button', function(req, res) {
+    res.send({status: 200, message: "Button pressed"});
+}).post('/toggle', function (req, res) {
+    var query = Object.keys(req.query).length === 0 ? null : req.query;
+
+    if ( query.hasOwnProperty(("state")) ) {
+        actions_test.toggle = query.state === "true";
+    }
+
+    res.send({status: 200, message: "Button updated"});
+}).post('/input', function (req, res) {
+    res.json({status: 200, value: req.body.value});
 });
 
 app.use('/', router);
